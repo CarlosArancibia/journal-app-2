@@ -18,7 +18,7 @@ export const NoteView = () => {
         <textarea
           className="w-full text-lg  mb-4 mt-2 bg-transparent border border-[#BDBBB844] resize-none custom-input"
           cols="30"
-          rows="8"
+          rows="5"
           placeholder="What happened today?"
         ></textarea>
         <PhotoGallery />
