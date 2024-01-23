@@ -1,15 +1,19 @@
-import { useDispatch } from 'react-redux';
+import { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks/useForm';
 import { checkingAuthentication, startGoogleSignIn } from '../../store/auth/thunks';
 
 export const LoginPage = () => {
+  const { status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { email, password, onInputChange } = useForm({
     email: 'carlos@google.com',
     password: '',
   });
+
+  const isAuthenticating = useMemo(() => status === 'checking', [status]);
 
   const onSignIn = (e) => {
     e.preventDefault();
@@ -44,12 +48,17 @@ export const LoginPage = () => {
           onChange={onInputChange}
         />
         <div className="flex flex-col md:flex-row gap-4">
-          <button type="submit" className="p-2 bg-[#333] rounded-md border border-[#BDBBB811] w-full">
+          <button
+            disabled={isAuthenticating}
+            type="submit"
+            className="p-2 bg-[#333] rounded-md border border-[#BDBBB811] w-full disabled:opacity-60"
+          >
             Log In
           </button>
           <button
+            disabled={isAuthenticating}
             type="button"
-            className="p-2 bg-[#333] rounded-md border border-[#BDBBB811] w-full"
+            className="p-2 bg-[#333] rounded-md border border-[#BDBBB811] w-full disabled:opacity-60"
             onClick={onGoogleSignIn}
           >
             Google
