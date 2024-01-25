@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks/useForm';
-import { checkingAuthentication, startGoogleSignIn } from '../../store/auth/thunks';
+import { startSignInEmailPassword, startSignInGoogle } from '../../store/auth/thunks';
 
 export const LoginPage = () => {
-  const { status } = useSelector((state) => state.auth);
+  const { status, errorMessage } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { email, password, onInputChange } = useForm({
-    email: 'carlos@google.com',
+    email: 'mel@google.com',
     password: '',
   });
 
@@ -17,13 +17,11 @@ export const LoginPage = () => {
 
   const onSignIn = (e) => {
     e.preventDefault();
-    console.log({ email, password });
-    dispatch(checkingAuthentication());
+    dispatch(startSignInEmailPassword({ email, password }));
   };
 
   const onGoogleSignIn = () => {
-    console.log('google');
-    dispatch(startGoogleSignIn());
+    dispatch(startSignInGoogle());
   };
 
   return (
@@ -47,6 +45,12 @@ export const LoginPage = () => {
           value={password}
           onChange={onInputChange}
         />
+        <div
+          className={`border rounded-lg border-red-300 p-3 mb-4 text-red-300 ${errorMessage ?? 'hidden'}`}
+        >
+          <span>⚠</span>
+          <span className="ml-2 text-sm">{errorMessage}</span>
+        </div>
         <div className="flex flex-col md:flex-row gap-4">
           <button
             disabled={isAuthenticating}
