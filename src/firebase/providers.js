@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
   updateProfile,
 } from 'firebase/auth';
 import { firebaseAuth } from './config';
@@ -78,4 +79,8 @@ export const signInWithEmailPassword = async (email, password) => {
       errorMessage,
     };
   }
+};
+
+export const signOutFirebase = async () => {
+  return await signOut(firebaseAuth);
 };

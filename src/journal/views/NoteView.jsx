@@ -2,7 +2,7 @@ import { PhotoGallery } from '../components/PhotoGallery';
 
 export const NoteView = () => {
   return (
-    <section className="">
+    <section className="animate__animated animate__fadeIn animate__faster">
       <header className="flex justify-between">
         <h2 className="text-lg">January 15, 2023</h2>
         <div>
