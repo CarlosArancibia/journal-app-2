@@ -2,9 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PhotoGallery } from '../components/PhotoGallery';
 import { useForm } from '../../hooks/useForm';
 import { startSaveNote } from '../../store/journal/thunks';
+import { useRef } from 'react';
 
 export const NoteView = () => {
   const dispatch = useDispatch();
+  const uploadInput = useRef();
+
   const { active: activeNote } = useSelector((state) => state.journal);
   const { date, photosURL } = activeNote;
   const { title, description, onInputChange } = useForm(activeNote);
@@ -15,13 +18,34 @@ export const NoteView = () => {
     dispatch(startSaveNote({ ...activeNote, title, description, photosURL }));
   };
 
+  const onDeleteNote = () => {
+    console.log('delete');
+  };
+
+  const onUploadFiles = ({ target }) => {
+    console.log(target.files);
+  };
+
   return (
     <section className="animate__animated animate__fadeIn animate__faster">
-      <header className="flex justify-between">
+      <header className="flex justify-between items-center">
         <h2 className="text-lg">{dateFormatted}</h2>
-        <div>
-          <button className="uppercase" onClick={onSaveNote}>
-            Save
+        <div className="flex gap-4">
+          <input type="file" multiple ref={uploadInput} className="hidden" onChange={onUploadFiles} />
+          <button
+            className="uppercase hover:bg-[#333] rounded-md md:p-2"
+            onClick={() => uploadInput.current.click()}
+          >
+            <i className="bx bx-upload md:mr-1"></i>
+            <span className="hidden md:inline">Upload</span>
+          </button>
+          <button className="uppercase hover:bg-[#333] rounded-md md:p-2" onClick={onDeleteNote}>
+            <i className="bx bx-trash md:mr-1"></i>
+            <span className="hidden md:inline">Delete</span>
+          </button>
+          <button className="uppercase  hover:bg-[#333] rounded-md md:p-2" onClick={onSaveNote}>
+            <i className="bx bx-save md:mr-1"></i>
+            <span className="hidden md:inline">Save</span>
           </button>
         </div>
       </header>

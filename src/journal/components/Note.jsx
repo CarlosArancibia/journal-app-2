@@ -1,8 +1,27 @@
 import { PropTypes } from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { addEmptyNote } from '../../store/journal/journalSlice';
 
-export const Note = ({ title, description, date }) => {
+export const Note = ({ title, description, date, id, photosURL }) => {
+  const dispatch = useDispatch();
+
+  const onSelectNote = () => {
+    dispatch(
+      addEmptyNote({
+        title,
+        description,
+        id,
+        date,
+        photosURL,
+      })
+    );
+  };
+
   return (
-    <article className="p-3 h-28 rounded-md mt-1 mx-2 hover:bg-[#333] cursor-pointer">
+    <article
+      className="p-3 h-28 rounded-md mt-1 mx-2 hover:bg-[#333] cursor-pointer"
+      onClick={onSelectNote}
+    >
       <div className="flex w-full items-center">
         <div className="note-item">
           <h3 className="font-semibold text-sm text-ellipsis overflow-hidden whitespace-nowrap">{title}</h3>
@@ -19,4 +38,6 @@ Note.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   date: PropTypes.number,
+  id: PropTypes.string,
+  photosURL: PropTypes.array,
 };

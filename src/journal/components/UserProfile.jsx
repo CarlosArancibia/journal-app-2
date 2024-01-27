@@ -3,7 +3,7 @@ import { startSignOut } from '../../store/auth/thunks';
 
 export const UserProfile = () => {
   const dispatch = useDispatch();
-  const { displayName } = useSelector((state) => state.auth);
+  const { displayName, photoURL } = useSelector((state) => state.auth);
   const onLogout = () => {
     dispatch(startSignOut());
   };
@@ -12,7 +12,7 @@ export const UserProfile = () => {
     <article className="flex items-center gap-3 mx-5 my-5 h-[7vh]">
       <img
         className="rounded-full border w-10 h-10 object-cover object-top"
-        src="/about.webp"
+        src={photoURL}
         alt="user profile"
       />
       <div className="flex-1 overflow-hidden">

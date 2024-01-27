@@ -11,6 +11,11 @@ const formValidations = {
 };
 
 const checkedValues = {};
+const formState = {
+  name: '',
+  email: '',
+  password: '',
+};
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -25,15 +30,7 @@ export const RegisterPage = () => {
     isFormValid,
     onInputChange,
     showValidations,
-  } = useForm(
-    {
-      name: '',
-      email: '',
-      password: '',
-    },
-    formValidations,
-    checkedValues
-  );
+  } = useForm(formState, formValidations, checkedValues);
 
   const onSignUp = (e) => {
     e.preventDefault();

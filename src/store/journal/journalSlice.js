@@ -12,7 +12,7 @@ export const journalSlice = createSlice({
       state.active = payload;
     },
     saveNote: (state, { payload }) => {
-      state.notes = [payload, ...state.notes];
+      state.notes = state.notes.map((note) => (note.id === payload.id ? payload : note));
       state.isSaving = false;
     },
     setSaving: (state) => {

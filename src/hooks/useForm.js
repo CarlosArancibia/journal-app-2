@@ -1,8 +1,12 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export const useForm = (initialFormState, validations = {}, checkedValues) => {
   const [formState, setFormState] = useState(initialFormState);
   const [formValidations, setFormValidations] = useState({});
+
+  useEffect(() => {
+    setFormState(initialFormState);
+  }, [initialFormState]);
 
   const onInputChange = ({ target }) => {
     const { name, value } = target;
