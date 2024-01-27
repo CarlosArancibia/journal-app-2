@@ -5,7 +5,7 @@ import { UserProfile } from '../components/UserProfile';
 export const JournalLayout = ({ children }) => {
   return (
     <div className="h-screen w-full bg-[#222] grid grid-cols-10">
-      <aside className="col-span-2 bg-[#3335] h-screen hidden md:block">
+      <aside className="col-span-2 bg-[#3335] h-screen hidden md:block over overflow-hidden">
         <UserProfile />
         <NotesList />
       </aside>
