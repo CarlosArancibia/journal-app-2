@@ -1,13 +1,13 @@
 import { PropTypes } from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { addEmptyNote } from '../../store/journal/journalSlice';
+import { setActiveNote } from '../../store/journal/journalSlice';
 
 export const Note = ({ title, description, date, id, photosURL }) => {
   const dispatch = useDispatch();
 
   const onSelectNote = () => {
     dispatch(
-      addEmptyNote({
+      setActiveNote({
         title,
         description,
         id,

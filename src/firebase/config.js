@@ -6,12 +6,12 @@ import { getFirestore } from 'firebase/firestore/lite';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyD4AtkQdpNdbYlGq9LdrIDHm7Ts66JAnEo',
-  authDomain: 'journal-7d3ab.firebaseapp.com',
-  projectId: 'journal-7d3ab',
-  storageBucket: 'journal-7d3ab.appspot.com',
-  messagingSenderId: '731584061765',
-  appId: '1:731584061765:web:eed1ebcadcaf39a0b51e2c',
+  apiKey: 'AIzaSyDAbeG0eCCfgf45LaPLTePK508iZir_8qo',
+  authDomain: 'journalapp-92aa7.firebaseapp.com',
+  projectId: 'journalapp-92aa7',
+  storageBucket: 'journalapp-92aa7.appspot.com',
+  messagingSenderId: '1038201402933',
+  appId: '1:1038201402933:web:202d86c8f635ba1b71a37c',
 };
 
 // Initialize Firebase

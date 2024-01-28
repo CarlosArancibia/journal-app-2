@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { PhotoGallery } from '../components/PhotoGallery';
 import { useForm } from '../../hooks/useForm';
-import { startSaveNote } from '../../store/journal/thunks';
+import { startDeleteNote, startSaveNote } from '../../store/journal/thunks';
 import { useRef } from 'react';
 
 export const NoteView = () => {
@@ -19,7 +19,7 @@ export const NoteView = () => {
   };
 
   const onDeleteNote = () => {
-    console.log('delete');
+    dispatch(startDeleteNote());
   };
 
   const onUploadFiles = ({ target }) => {
