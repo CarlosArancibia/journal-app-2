@@ -79,3 +79,12 @@ body {
 .notes::-webkit-scrollbar {
   display: none;
 }
+
+/**/
+
+@media (max-width: 767px) {
+  .gallery {
+    height: calc(100vh - 400px);
+    overflow-y: scroll;
+  }
+}

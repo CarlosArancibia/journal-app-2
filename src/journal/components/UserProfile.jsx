@@ -16,13 +16,15 @@ export const UserProfile = () => {
         alt="user profile"
       />
       <div className="flex-1 overflow-hidden">
-        <h2 className="text-sm text-ellipsis overflow-hidden whitespace-nowrap">{displayName}</h2>
+        <h2 className="text-sm text-ellipsis overflow-hidden whitespace-nowrap">
+          {displayName ?? 'Unknown'}
+        </h2>
         <p className="text-xs text-gray-400 overflow-hidden text-ellipsis whitespace-nowrap">
           Journal Member
         </p>
       </div>
       <button onClick={onLogout}>
-        <i className="bx bx-log-out text-2xl"></i>
+        <i className={`bx ${displayName ? 'bx-log-out' : 'bx-log-in'} text-2xl hidden md:inline`}></i>
       </button>
     </article>
   );

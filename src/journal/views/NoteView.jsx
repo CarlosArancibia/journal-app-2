@@ -52,22 +52,22 @@ export const NoteView = () => {
     <section className="animate__animated animate__fadeIn animate__faster">
       <header className="flex justify-between items-center">
         <h2 className="text-lg">{dateFormatted}</h2>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <input type="file" multiple ref={uploadInput} className="hidden" onChange={onUploadFiles} />
           <button
-            className="uppercase hover:bg-[#333] rounded-md md:p-2 flex"
+            className="uppercase hover:bg-[#333] rounded-md md:p-2"
             onClick={() => uploadInput.current.click()}
           >
             <i className="bx bx-upload md:mr-1"></i>
-            <span className="hidden md:inline">Upload</span>
+            <span className="hidden md:inline text-lg">Upload</span>
             {isUploading && <span className="loader-2 flex max-h-5 max-w-5 ml-2"></span>}
           </button>
           <button className="uppercase hover:bg-[#333] rounded-md md:p-2" onClick={onDeleteNote}>
-            <i className="bx bx-trash md:mr-1"></i>
+            <i className="bx bx-trash md:mr-1 text-lg"></i>
             <span className="hidden md:inline">Delete</span>
           </button>
           <button className="uppercase  hover:bg-[#333] rounded-md md:p-2" onClick={onSaveNote}>
-            <i className="bx bx-save md:mr-1"></i>
+            <i className="bx bx-save md:mr-1 text-lg"></i>
             <span className="hidden md:inline">Save</span>
           </button>
         </div>

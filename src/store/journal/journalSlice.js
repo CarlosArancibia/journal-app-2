@@ -8,11 +8,13 @@ export const journalSlice = createSlice({
     notes: [],
     active: null,
     messageFeedback: '',
+    isOpenSidebar: false,
   },
   reducers: {
     setActiveNote: (state, { payload }) => {
       state.active = payload;
       state.messageFeedback = '';
+      state.isOpenSidebar = false;
     },
     saveNote: (state, { payload }) => {
       state.notes = [payload, ...state.notes];
@@ -50,6 +52,9 @@ export const journalSlice = createSlice({
       state.notes = [];
       state.messageFeedback = '';
     },
+    setOpenSidebar: (state) => {
+      state.isOpenSidebar = !state.isOpenSidebar;
+    },
   },
 });
 
@@ -63,4 +68,5 @@ export const {
   deleteNote,
   uploadImages,
   clearState,
+  setOpenSidebar,
 } = journalSlice.actions;
