@@ -12,7 +12,7 @@ export const UserProfile = () => {
     <article className="flex items-center gap-3 mx-5 my-5 h-[7vh]">
       <img
         className="rounded-full border w-10 h-10 object-cover object-top"
-        src={photoURL}
+        src={photoURL ?? '/default-profile.svg'}
         alt="user profile"
       />
       <div className="flex-1 overflow-hidden">

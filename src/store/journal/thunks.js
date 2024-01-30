@@ -1,19 +1,15 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, setDoc } from 'firebase/firestore/lite';
-import { setActiveNote, deleteNote, loadNotes, saveNote, setSaving, updateNote } from './journalSlice';
+import {
+  deleteNote,
+  loadNotes,
+  saveNote,
+  setSaving,
+  setUploading,
+  updateNote,
+  uploadImages,
+} from './journalSlice';
 import { firebaseDB } from '../../firebase/config';
-
-export const startAddEmptyNote = () => {
-  return async (dispatch) => {
-    const note = {
-      title: '',
-      description: '',
-      date: new Date().getTime(),
-      photosURL: [],
-    };
-
-    dispatch(setActiveNote(note));
-  };
-};
+import { uploadFile } from '../../journal/helpers/uploadFile';
 
 export const startSaveNote = (note) => {
   return async (dispatch, getState) => {
@@ -40,7 +36,6 @@ export const startLoadNotes = () => {
 
     const { docs } = await getDocs(collection(firebaseDB, `${uid}/journal/notes/`));
     const notes = docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    console.log('load');
     // order notes
     const notesSort = notes.sort((a, b) => b.date - a.date);
 
@@ -56,5 +51,20 @@ export const startDeleteNote = () => {
     await deleteDoc(doc(firebaseDB, `${uid}/journal/notes/${note.id}`));
 
     dispatch(deleteNote(note));
+  };
+};
+
+export const startUploadImages = (images = []) => {
+  return async (dispatch) => {
+    dispatch(setUploading());
+
+    const imagesToUpload = [];
+
+    for (const image of images) {
+      imagesToUpload.push(uploadFile(image));
+    }
+
+    const imagesURL = await Promise.all(imagesToUpload);
+    dispatch(uploadImages(imagesURL));
   };
 };

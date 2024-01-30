@@ -1,18 +1,40 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { PhotoGallery } from '../components/PhotoGallery';
 import { useForm } from '../../hooks/useForm';
-import { startDeleteNote, startSaveNote } from '../../store/journal/thunks';
-import { useRef } from 'react';
+import { startDeleteNote, startSaveNote, startUploadImages } from '../../store/journal/thunks';
+import { useEffect, useRef } from 'react';
+import Swal from 'sweetalert2';
+import { setActiveNote } from '../../store/journal/journalSlice';
 
 export const NoteView = () => {
   const dispatch = useDispatch();
   const uploadInput = useRef();
 
-  const { active: activeNote } = useSelector((state) => state.journal);
+  const { active: activeNote, messageFeedback, isUploading } = useSelector((state) => state.journal);
   const { date, photosURL } = activeNote;
-  const { title, description, onInputChange } = useForm(activeNote);
+  const { title, description, formState, onInputChange } = useForm(activeNote);
 
   const dateFormatted = new Date(date).toDateString();
+
+  useEffect(() => {
+    dispatch(setActiveNote(formState));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formState]);
+
+  useEffect(() => {
+    if (messageFeedback.length > 0) {
+      Swal.fire({
+        title: 'Note saved!',
+        text: messageFeedback,
+        icon: 'success',
+        background: '#333',
+        color: '#ddd',
+        width: 500,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  }, [messageFeedback]);
 
   const onSaveNote = () => {
     dispatch(startSaveNote({ ...activeNote, title, description, photosURL }));
@@ -23,7 +45,7 @@ export const NoteView = () => {
   };
 
   const onUploadFiles = ({ target }) => {
-    console.log(target.files);
+    dispatch(startUploadImages(target.files));
   };
 
   return (
@@ -33,11 +55,12 @@ export const NoteView = () => {
         <div className="flex gap-4">
           <input type="file" multiple ref={uploadInput} className="hidden" onChange={onUploadFiles} />
           <button
-            className="uppercase hover:bg-[#333] rounded-md md:p-2"
+            className="uppercase hover:bg-[#333] rounded-md md:p-2 flex"
             onClick={() => uploadInput.current.click()}
           >
             <i className="bx bx-upload md:mr-1"></i>
             <span className="hidden md:inline">Upload</span>
+            {isUploading && <span className="loader-2 flex max-h-5 max-w-5 ml-2"></span>}
           </button>
           <button className="uppercase hover:bg-[#333] rounded-md md:p-2" onClick={onDeleteNote}>
             <i className="bx bx-trash md:mr-1"></i>
@@ -67,7 +90,7 @@ export const NoteView = () => {
           value={description}
           onChange={onInputChange}
         ></textarea>
-        <PhotoGallery />
+        <PhotoGallery photos={photosURL} />
       </section>
     </section>
   );

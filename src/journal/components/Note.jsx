@@ -27,7 +27,9 @@ export const Note = ({ title, description, date, id, photosURL }) => {
           <h3 className="font-semibold text-sm text-ellipsis overflow-hidden whitespace-nowrap">{title}</h3>
           <p className="text-sm font-thin text-ellipsis overflow-hidden whitespace-nowrap">{description}</p>
         </div>
-        <img className="w-16 h-16 object-scale-down" src="/about.webp" alt="image-post" />
+        {photosURL.length > 0 && (
+          <img className="max-w-16 h-16 object-scale-down" src={photosURL[0]} alt="image-post" />
+        )}
       </div>
       <span className="block text-xs text-gray-400">{`${new Date(date).toLocaleTimeString()}`}</span>
     </article>
