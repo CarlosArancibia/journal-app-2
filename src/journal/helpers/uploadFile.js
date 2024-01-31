@@ -1,7 +1,10 @@
+import { getEnvVariables } from './getEnvVariables';
+
 export const uploadFile = async (file) => {
   if (!file) throw new Error('No file to upload');
 
-  const cloudURL = 'https://api.cloudinary.com/v1_1/dev-ceab/image/upload';
+  const { VITE_CLOUD_NAME } = getEnvVariables();
+  const cloudURL = `https://api.cloudinary.com/v1_1/${VITE_CLOUD_NAME}/image/upload`;
 
   const formData = new FormData();
   formData.append('file', file);

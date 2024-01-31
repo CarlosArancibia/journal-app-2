@@ -55,10 +55,10 @@ export const NoteView = () => {
         <div className="flex gap-4 items-center">
           <input type="file" multiple ref={uploadInput} className="hidden" onChange={onUploadFiles} />
           <button
-            className="uppercase hover:bg-[#333] rounded-md md:p-2"
+            className="uppercase hover:bg-[#333] rounded-md md:p-2 flex"
             onClick={() => uploadInput.current.click()}
           >
-            <i className="bx bx-upload md:mr-1"></i>
+            <i className="bx bx-upload md:mr-1 md:pt-1"></i>
             <span className="hidden md:inline text-lg">Upload</span>
             {isUploading && <span className="loader-2 flex max-h-5 max-w-5 ml-2"></span>}
           </button>

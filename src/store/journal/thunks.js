@@ -18,6 +18,14 @@ export const startSaveNote = (note) => {
     const { uid } = getState().auth;
     const { id, ...noteToFirebase } = note;
 
+    // not-authenticated
+    if (!uid) {
+      if (id) return dispatch(updateNote(note));
+      note.id = Math.random().toString();
+      return dispatch(saveNote(note));
+    }
+
+    // authenticated
     if (id) {
       const docRef = await doc(firebaseDB, `${uid}/journal/notes/${id}`);
       await setDoc(docRef, noteToFirebase);
@@ -48,6 +56,10 @@ export const startDeleteNote = () => {
     const { active: note } = getState().journal;
     const { uid } = getState().auth;
 
+    // not-authenticated
+    if (!uid) return dispatch(deleteNote(note));
+
+    // authenticated
     await deleteDoc(doc(firebaseDB, `${uid}/journal/notes/${note.id}`));
 
     dispatch(deleteNote(note));

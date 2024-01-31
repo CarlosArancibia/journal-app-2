@@ -10,11 +10,9 @@ export const AppRouter = () => {
 
   return (
     <Routes>
-      {status === 'authenticated' ? (
-        <Route path="auth/*" element={<AuthRoutes />} />
-      ) : (
-        <Route path="/*" element={<JournalRoutes />} />
-      )}
+      {status === 'not-authenticated' && <Route path="auth/*" element={<AuthRoutes />} />}
+
+      <Route path="/*" element={<JournalRoutes />} />
 
       <Route path="/*" element={<Navigate to={'/auth/login'} />} />
     </Routes>

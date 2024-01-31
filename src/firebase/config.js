@@ -1,12 +1,13 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore/lite';
+import { getEnvVariables } from '../journal/helpers/getEnvVariables';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyDAbeG0eCCfgf45LaPLTePK508iZir_8qo',
+  apiKey: getEnvVariables().VITE_API_KEY_FB,
   authDomain: 'journalapp-92aa7.firebaseapp.com',
   projectId: 'journalapp-92aa7',
   storageBucket: 'journalapp-92aa7.appspot.com',
