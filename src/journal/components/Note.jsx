@@ -19,7 +19,7 @@ export const Note = ({ title, description, date, id, photosURL }) => {
 
   return (
     <article className="p-3  rounded-md mt-1 mx-2 hover:bg-[#333] cursor-pointer" onClick={onSelectNote}>
-      <div className="flex w-full items-center">
+      <div className="flex w-full items-center justify-between">
         <div className="note-item min-h-12">
           <h3 className="font-semibold text-sm text-ellipsis overflow-hidden whitespace-nowrap">{title}</h3>
           <p className="text-sm font-thin text-ellipsis overflow-hidden whitespace-nowrap">{description}</p>

@@ -10,7 +10,7 @@ export const JournalLayout = ({ children }) => {
     <div className="h-screen w-full bg-[#222] grid grid-cols-10 relative">
       <Header />
       <aside
-        className={`fixed md:static min-w-56 md:col-span-2 bg-[#333] md:bg-[#3335] h-screen z-50 md:block overflow-hidden duration-700 ${
+        className={`fixed md:static min-w-56 max-w-64 md:max-w-96 md:col-span-2 bg-[#333] md:bg-[#3335] h-screen z-50 md:block overflow-hidden duration-700 ${
           isOpenSidebar ? 'left-0' : 'left-[-490px]'
         }`}
       >
