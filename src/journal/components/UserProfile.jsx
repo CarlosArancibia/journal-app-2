@@ -24,7 +24,7 @@ export const UserProfile = () => {
         </p>
       </div>
       <button onClick={onLogout}>
-        <i className={`bx ${displayName ? 'bx-log-out' : 'bx-log-in'} text-2xl hidden md:inline`}></i>
+        <i className={`bx ${displayName ? 'bx-log-out' : ''} text-2xl hidden md:inline`}></i>
       </button>
     </article>
   );
