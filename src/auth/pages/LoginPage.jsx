@@ -67,6 +67,7 @@ export const LoginPage = () => {
             className="p-2 bg-[#333] rounded-md border border-[#BDBBB811] w-full disabled:opacity-60"
             onClick={onGoogleSignIn}
           >
+            <img className="h-5 mr-2 inline" src="/google-icon.svg" alt="google icon" />
             Google
           </button>
         </div>
