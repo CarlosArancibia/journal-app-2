@@ -21,7 +21,7 @@ export const Header = () => {
         <button onClick={onLogout}>
           <i className={`bx ${displayName ? 'bx-log-out' : 'bx-log-in'} text-2xl`}></i>
         </button>
-        <h1 className="text-xl">Journal</h1>
+        <h1 className="text-xl">JournaLife</h1>
         <button className="flex" onClick={onOpenSidebar}>
           <i className={`bx ${isOpenSidebar ? 'bx-x' : 'bx-menu'} text-3xl`}></i>
         </button>
